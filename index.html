@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Testmodell mit AR</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden; /* Verhindert das Scrollen der Seite */
+    }
+
+    model-viewer {
+      width: 90vw; /* Modell wird auf 90% der Bildschirmbreite verkleinert */
+      height: 80vh; /* Modell wird auf 80% der Bildschirmhöhe verkleinert */
+      margin: auto;
+      background-color: #e0e0e0;
+    }
+
+    /* Stil für den AR-Button */
+    #ar-button {
+      position: absolute;
+      left: 50%;
+      bottom: 40px; /* Position etwas nach oben verschoben, damit der Button sichtbar ist */
+      transform: translateX(-50%);
+      background-color: white;
+      border: 2px solid #4285f4;
+      border-radius: 50px;
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #4285f4;
+      background-image: url('https://modelviewer.dev/shared-assets/icons/ic_view_in_ar_new_googblue_48dp.png');
+      background-repeat: no-repeat;
+      background-position: 12px center;
+      background-size: 28px 28px;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    #ar-button:active {
+      background-color: #e0e0e0;
+    }
+
+    #ar-button:focus {
+      outline: none;
+    }
+
+  </style>
+</head>
+<body>
+
+<model-viewer
+  src="manhaus.glb"
+  alt="3D-Modell von manhaus"
+  auto-rotate
+  camera-controls
+  ar
+  ar-modes="scene-viewer webxr quick-look">
+  
+  <!-- AR Button, der in der Mitte erscheint -->
+  <button slot="ar-button" id="ar-button">
+    In deinem Raum ansehen
+  </button>
+
+</model-viewer>
+
+<script>
+  // Funktionalität des AR-Buttons sicherstellen
+  const modelViewer = document.querySelector('model-viewer');
+  const arButton = document.getElementById('ar-button');
+  
+  arButton.addEventListener('click', () => {
+    modelViewer.enterAR();
+  });
+</script>
+
+</body>
+</html>
