@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>NIEMANDEN JUCKT´S - UNS SCHON !</title>
+  <style>
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+    }
+    #header {
+      text-align: center;
+      padding: 20px 10px;
+      background-color: #f5f5f5;
+    }
+    #logo {
+      max-width: 240px;  /* größer */
+      height: auto;
+      margin-bottom: 20px;
+    }
+    #header p {
+      margin: 0 0 25px;
+      font-size: 20px;   /* größer */
+      color: #555;
+    }
+    model-viewer {
+      width: 90vw;
+      height: 70vh;
+      display: block;
+      margin: 0 auto 40px;
+      background-color: #e0e0e0;
+    }
+    #ar-button {
+      position: absolute;
+      left: 50%;
+      bottom: 40px;
+      transform: translateX(-50%);
+      background-color: white;
+      border: 2px solid #4285f4;
+      border-radius: 50px;
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #4285f4;
+      background-image: url("https://modelviewer.dev/shared-assets/icons/ic_view_in_ar_new_googblue_48dp.png");
+      background-repeat: no-repeat;
+      background-position: 12px center;
+      background-size: 28px 28px;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    #ar-button:active {
+      background-color: #e0e0e0;
+    }
+    #ar-button:focus {
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="header">
+    <img src="MANLogo.svg" alt="MAN Logo" id="logo" />
+    <p>Besucht uns in der Barfüßerstraße & taucht in die Geschichte der vergessenen MAN-Stahlhäusern ein!</p>
+  <p>Wann: 10.07.25 - 27.07.25</p>
+    <p></p>
+  <p>Erleben Sie das MAN-Stahlhaus als 3D Modell in Augmented Reality:</p>
+  </div>
+
+  <model-viewer
+    src="manhaus.glb"
+    alt="3D-Modell von MAN Stahlhaus"
+    auto-rotate
+    camera-controls
+    ar
+    ar-modes="scene-viewer webxr quick-look"
+  >
+    <button slot="ar-button" id="ar-button" aria-label="In deinem Raum ansehen">
+      In deinem Raum ansehen
+    </button>
+  </model-viewer>
+
+  <script type="module" src="model-viewer.min.js"></script>
+
+  <script>
+    const modelViewer = document.querySelector("model-viewer");
+    const arButton = document.getElementById("ar-button");
+
+    arButton.addEventListener("click", () => {
+      modelViewer.enterAR();
+    });
+  </script>
+</body>
+</html>
